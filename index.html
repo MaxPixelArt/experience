@@ -3,23 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex"> <title>Exclusive Experience</title>
+    <title>MaxPixelArt | Exclusive</title>
     <style>
-        body { background-color: #050505; color: #ffffff; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; margin: 0; text-align: center; }
-        .container { max-width: 400px; padding: 20px; }
-        .logo { font-size: 1.2rem; letter-spacing: 0.3rem; text-transform: uppercase; margin-bottom: 50px; opacity: 0.8; }
-        audio { width: 100%; filter: invert(1) hue-rotate(180deg); opacity: 0.9; } /* Player minimale bianco */
-        p { font-weight: 300; font-size: 0.9rem; margin-top: 30px; letter-spacing: 0.1rem; color: #888; }
+        body { background: #000; color: #fff; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; text-align: center; }
+        .box { padding: 20px; }
+        audio { filter: invert(1); margin-top: 20px; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="logo">MaxPixelArt</div>
-        <audio controls>
-            <source src="Zen Noir in Slow Motion.mp3" type="audio/mpeg">
-            Il tuo browser non supporta l'audio.
+    <div class="box">
+        <h2 id="titolo">Caricamento...</h2>
+        <audio id="player" controls autoplay>
+            <source id="audioSource" src="" type="audio/mpeg">
         </audio>
-        <p>Contenuto Esclusivo per l'Acquirente</p>
     </div>
+
+    <script>
+        // Legge il parametro "brano" dall'URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const brano = urlParams.get('v'); // es. ?v=estate
+        
+        const player = document.getElementById('player');
+        const source = document.getElementById('audioSource');
+        const titolo = document.getElementById('titolo');
+
+        if (brano) {
+            source.src = brano + ".mp3"; // Carica il file .mp3 corrispondente
+            titolo.innerText = "Esperienza Esclusiva";
+            player.load();
+        } else {
+            titolo.innerText = "Nessun brano trovato";
+        }
+    </script>
 </body>
 </html>
