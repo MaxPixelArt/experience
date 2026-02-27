@@ -3,36 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
     <title>MaxPixelArt | Exclusive</title>
     <style>
-        body { background: #000; color: #fff; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; text-align: center; }
-        .box { padding: 20px; }
-        audio { filter: invert(1); margin-top: 20px; }
+        body { 
+            background-color: #050505; 
+            color: #ffffff; 
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            text-align: center; 
+        }
+        .container { max-width: 400px; padding: 20px; }
+        .logo { 
+            font-size: 1.2rem; 
+            letter-spacing: 0.3rem; 
+            text-transform: uppercase; 
+            margin-bottom: 50px; 
+            opacity: 0.8; 
+        }
+        audio { 
+            width: 100%; 
+            filter: invert(1) hue-rotate(180deg); 
+            opacity: 0.9; 
+        }
+        .titolo-esperienza { 
+            font-weight: 300; 
+            font-size: 0.9rem; 
+            margin-top: 30px; 
+            letter-spacing: 0.1rem; 
+            color: #888; 
+            text-transform: none;
+        }
     </style>
 </head>
 <body>
-    <div class="box">
-        <h2 id="titolo">Caricamento...</h2>
-        <audio id="player" controls autoplay>
+    <div class="container">
+        <div class="logo">MaxPixelArt</div>
+        
+        <audio id="player" controls>
             <source id="audioSource" src="" type="audio/mpeg">
+            Il tuo browser non supporta l'audio.
         </audio>
+        
+        <div class="titolo-esperienza" id="status">Esperienza Esclusiva</div>
     </div>
 
     <script>
-        // Legge il parametro "brano" dall'URL
+        // Legge il nome del file dall'URL (es. ?v=nomefile)
         const urlParams = new URLSearchParams(window.location.search);
-        const brano = urlParams.get('v'); // es. ?v=estate
+        const brano = urlParams.get('v');
         
         const player = document.getElementById('player');
         const source = document.getElementById('audioSource');
-        const titolo = document.getElementById('titolo');
+        const status = document.getElementById('status');
 
         if (brano) {
-            source.src = brano + ".mp3"; // Carica il file .mp3 corrispondente
-            titolo.innerText = "Esperienza Esclusiva";
+            // Carica il file .mp3 che ha il nome indicato nell'URL
+            source.src = brano + ".mp3";
             player.load();
         } else {
-            titolo.innerText = "Nessun brano trovato";
+            status.innerText = "In attesa di scansione...";
         }
     </script>
 </body>
